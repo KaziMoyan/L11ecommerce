@@ -6,12 +6,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 
+use App\Http\Controllers\ProductController;
+
 
 Route::get('/', [HomeController::class, 'home']);
 
 Route::get('/dashboard', [HomeController::class, 'login_home'])->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/myorders', [HomeController::class, 'myorders'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/myorders', [HomeController::class, 'myorders'])->middleware(['auth', 'verified'])->name('');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -72,3 +74,12 @@ route::get('delivered/{id}',[AdminController::class, 'delivered']) ->middleware(
 route::get('print_pdf/{id}',[AdminController::class, 'print_pdf']) ->middleware(['auth','admin']);
 
 Route::get('/shop', 'ShopController@index')->name('shop');
+
+
+route::get('shop',[HomeController::class, 'shop']);
+
+route::get('about',[HomeController::class, 'about']);
+
+route::get('testimonial',[HomeController::class, 'testimonial']);
+
+route::get('contact',[HomeController::class, 'contact']);

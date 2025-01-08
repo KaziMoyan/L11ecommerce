@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head> 
+<head> 
     @include('admin.css')
 
     <style type="text/css">
@@ -15,13 +15,43 @@
         input[type='text'] {
             width: 400px;
             height: 50px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        input[type='text']:focus {
+            border-color: skyblue;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        }
+
+        .btn {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: white;
+            transition: all 0.3s ease;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        h1 {
+            color: white;
         }
 
     </style>
 
 
-  </head>
-  <body>
+</head>
+<body>
     @include('admin.header')
     
     @include('admin.sidebar')
@@ -30,7 +60,7 @@
         <div class="page-header">
           <div class="container-fluid">
 
-          <h1 style="color: white;">Update Category</h1>
+          <h1>Update Category</h1>
 
           <div class="div_design">
                 
@@ -40,7 +70,7 @@
                 @csrf
 
                         <input type="text" name="category" value="{{$data->category_name}}">
-                        <input class="btn btn-primary" type="submit" value= "Update Category">
+                        <input class="btn" type="submit" value= "Update Category">
                 </form>
 
 

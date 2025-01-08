@@ -1,116 +1,120 @@
 <!DOCTYPE html>
 <html>
-  <head> 
+<head> 
     @include('admin.css')
 
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
     <style type="text/css">
-
-        .div_design {
+        .page-content {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 60px;
+            height: 100vh; /* Adjust as needed */
         }
 
-        h1{
-           color: white; 
+        .form-container {
+            width: 80%; /* Adjust width as needed */
+            max-width: 800px; /* Max width for responsiveness */
+            background-color: #110f0f; /* Example background color */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
 
-        label{
-            display: inline-block;
-            width: 200px;
-            font-size: 18px!important;
-            color: white!important;
+        h1 {
+            text-align: center;
+            color: #f3f3f3;
+            margin-bottom: 30px;
         }
 
-        input[type='text']{
+        label {
+            font-size: 18px;
+            color: #555;
+        }
 
-            width: 350px;
+        input[type='text'], input[type='number'], textarea, select, input[type='file'] {
+            width: 100%;
             height: 50px;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: all 0.3s ease;
         }
 
-        textarea{
-            width: 450px;
-            height: 80px;
+        input[type='text']:focus, input[type='number']:focus, textarea:focus, select:focus, input[type='file']:focus {
+            border-color: skyblue;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
         }
 
-        .input_design{
-            padding: 15px;
+        .btn-success {
+            width: 100%;
+            height: 50px;
+            font-size: 18px;
+            transition: all 0.3s ease;
         }
 
+        .btn-success:hover {
+            transform: scale(1.05);
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     @include('admin.header')
-    
     @include('admin.sidebar')
-      <!-- Sidebar Navigation end-->
-      <div class="page-content">
-        <div class="page-header">
-          <div class="container-fluid">
 
-          <h1>Add Product</h1>
+    <div class="page-content">
+        <div class="form-container">
+            <h1>Add Product</h1>
 
-            <div class="div_design">
+            <form action="{{url('upload_product')}}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group">
+                    <label>Product Title</label>
+                    <input type="text" name="title" required>
+                </div>
 
-                <form action="{{url('upload_product')}}" method="Post" enctype="multipart/form-data">
-                        @csrf
-                    <div class="input_design">
-                        <label>Product Title</label>
-                        <input type="text" name= "title" required>
-                    </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="description" required></textarea>
+                </div>
 
-                    <div class="input_design">
-                        <label>Description</label>
-                        <textarea name="description" required></textarea>
-                    </div>
+                <div class="form-group">
+                    <label>Price</label>
+                    <input type="text" name="price" required>
+                </div>
 
-                    <div class="input_design">
-                        <label>Price</label>
-                        <input type="text" name= "price" required>
-                    </div>
+                <div class="form-group">
+                    <label>Quantity</label>
+                    <input type="number" name="quantity" required>
+                </div>
 
-                    <div class="input_design">
-                        <label>Quantity</label>
-                        <input type="number" name= "quantity" required>
-                    </div>
+                <div class="form-group">
+                    <label>Product Category</label>
+                    <select name="category" required>
+                        <option>Select an option</option>
+                        @foreach($category as $cat)
+                        <option value="{{$cat->category_name}}">{{$cat->category_name}}</option>
+                        @endforeach
+                    </select>
+                </div>
 
-                    <div class="input_design">
-                        <label>Product Category</label>
+                <div class="form-group">
+                    <label>Product Image</label>
+                    <input type="file" name="image" required>
+                </div>
 
-                        <select name="category" required>
-                            <option>Select an option</option>
-                                @foreach($category as $category)
-                                    <option value="{{$category->category_name}}">{{$category->category_name}}</option>
-                                @endforeach
-                        </select>
-                    </div>
-
-                    <div class="input_design">
-                        <label>Product Image</label>
-                        <input type="file" name= "image" required>
-                    </div>
-
-                    <div class="input_design">
-                        <input class="btn btn-success" type="submit" value="Add Product">
-                    </div>
-
-                </form>
-
-
-            </div>
-
-            </div>  
-      </div>
+                <div class="form-group">
+                    <input class="btn btn-success" type="submit" value="Add Product">
+                </div>
+            </form>
+        </div>
     </div>
+
     <!-- JavaScript files-->
-    <script src="{{asset('admincss/vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{asset('admincss/vendor/popper.js/umd/popper.min.js')}}"> </script>
-    <script src="{{asset('admincss/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('admincss/vendor/jquery.cookie/jquery.cookie.js')}}"> </script>
-    <script src="{{asset('admincss/vendor/chart.js/Chart.min.js')}}"></script>
-    <script src="{{asset('admincss/vendor/jquery-validation/jquery.validate.min.js')}}"></script>
-    <script src="{{asset('admincss/js/charts-home.js')}}"></script>
-    <script src="{{asset('admincss/js/front.js')}}"></script>
-  </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 </html>

@@ -1,4 +1,20 @@
-<x-guest-layout>
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+@include('home.css')
+</head>
+
+<body>
+  <div class="hero_area">
+    <!-- header section strats -->
+    @include('home.header')
+    <!-- end header section -->
+    <!-- slider section -->
+    <!-- end slider section -->
+  </div>
+  <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -45,3 +61,11 @@
         </div>
     </form>
 </x-guest-layout>
+
+
+@include('home.footer')
+</body>
+
+</html>
+
+

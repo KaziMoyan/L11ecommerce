@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
 use App\Models\User;
 use App\Models\Order;
+use Alert;
 
 class HomeController extends Controller
 {
@@ -76,6 +77,7 @@ class HomeController extends Controller
     $data->product_id =$product_id;
     $data->save();
     toastr()->timeOut(1000)->closeButton()->addSuccess('category added successfullu');
+   
     return redirect()->back();
    
 
@@ -140,6 +142,72 @@ public function myorders(){
     $count = Cart:: where('user_id',$user)->get()->count();
     $order =Order:: where('user_id',$user)->get();
     return view('home.order',compact('count','order'));
+}
+public function shop()
+{
+    $product = Product::all();
+
+    if(Auth::id()){
+        $user = Auth::user();
+        $userid = $user->id;
+        $count = Cart:: where('user_id',$userid)->count();
+    }
+    else{
+        $count='';
+    }
+
+
+  
+    return view('home.shop',compact('product','count'));
+
+}
+public function about()
+{
+    
+    if(Auth::id()){
+        $user = Auth::user();
+        $userid = $user->id;
+        $count = Cart:: where('user_id',$userid)->count();
+    }
+    else{
+        $count='';
+    }
+
+    return view('home.about',compact('count'));
+
+}
+
+
+public function testimonial()
+{
+    
+    if(Auth::id()){
+        $user = Auth::user();
+        $userid = $user->id;
+        $count = Cart:: where('user_id',$userid)->count();
+    }
+    else{
+        $count='';
+    }
+
+    return view('home.testimonial',compact('count'));
+
+}
+
+public function contact()
+{
+    
+    if(Auth::id()){
+        $user = Auth::user();
+        $userid = $user->id;
+        $count = Cart:: where('user_id',$userid)->count();
+    }
+    else{
+        $count='';
+    }
+
+    return view('home.contact',compact('count'));
+
 }
 
 
